@@ -20,24 +20,24 @@ class BookController extends AbstractController
     #[Route('', name: 'create', methods: ['HEAD','GET','POST'])]
     public function create(): Response
     {
-        return $this->render('xxxx');
+        return $this->render('pages/book/create.html.twig');
     }
 
     #[Route('/{id}', name: 'read', methods: ['HEAD','GET'])]
     public function read(): Response
     {
-        return $this->render('xxxx');
+        return $this->render('pages/book/read.html.twig');
     }
 
     #[Route('/{id}/edit', name: 'update', methods: ['HEAD','GET','POST'])]
     public function update(): Response
     {
-        return $this->render('xxxx');
+        return $this->render('pages/book/update.html.twig');
     }
 
     #[Route('/{id}/delete', name: 'delete', methods: ['HEAD','GET','DELETE'])]
     public function delete(): Response
     {
-        return $this->render('xxxx');
+        return $this->render('pages/book/delete.html.twig');
     }
 }
