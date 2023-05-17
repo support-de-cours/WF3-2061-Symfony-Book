@@ -4,4 +4,12 @@
 
 {% block body %}
 <h1>Index</h1>
+
+<a href="{{ url('book:create') }}">Créer un nouveau livre</a>
+
+
+{% for book in books %}
+    <div>{{ book.title }}</div>
+{% endfor %}
+
 {% endblock %}

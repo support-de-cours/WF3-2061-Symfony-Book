@@ -2,7 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Book;
+use App\Form\BookType;
+use App\Repository\BookRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -12,15 +16,39 @@ class BookController extends AbstractController
     #[Route('s', name: 'index', methods: ['HEAD','GET'])]
     public function index(): Response
     {
+        $books =  [];
+
         return $this->render('pages/book/index.html.twig', [
-            'controller_name' => 'BookController',
+            'books' => $books,
         ]);
     }
 
     #[Route('', name: 'create', methods: ['HEAD','GET','POST'])]
-    public function create(): Response
+    public function create(Request $request, BookRepository $bookRepository): Response
     {
-        return $this->render('pages/book/create.html.twig');
+        // Création d'une nouvelle entité
+        $book = new Book;
+
+        dump($book);
+        // Création du formulaire
+        $form = $this->createForm(BookType::class, $book);
+
+        // Attrapa et test la methode de requete (GET ou POST)
+        $form->handleRequest($request);
+
+
+        // Controlle du formulaire
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $bookRepository->save($book, true);
+            dd($book);
+        }
+
+        $form = $form->createView();
+
+        return $this->render('pages/book/create.html.twig', [
+            'form' => $form
+        ]);
     }
 
     #[Route('/{id}', name: 'read', methods: ['HEAD','GET'])]
