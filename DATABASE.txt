@@ -1,0 +1,47 @@
+TABLE: Book
+---------
+
+id
+title           varchar(120)
+description     text
+cover           varchar(40)
+createdAt       DATETIME
+updateAt        DATETIME
+isPublished     tinyint(1)
+
+
+
+TABLE: Author
+---------
+
+id
+firstname       varchar(40)
+lastname        varchar(40)
+fullname        varchar(81)
+screenname      varchar(43)
+gender          enum('M','F','N')
+country         char(2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+TABLE: Book_Author
+---------
+
+book_id
+author_id
+
